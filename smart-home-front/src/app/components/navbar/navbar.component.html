@@ -1,0 +1,30 @@
+<div class="main">
+  <p class="logo">Smart Home</p>
+  <div class="options" *ngIf="isSignIn">
+    <div class="option-wrapper" *ngIf="this.authService.getRole() == 'ADMIN' || this.authService.getRole() == 'SUPER_ADMIN'">
+      <a class="option" [routerLink]="['admin-power-consumption']">POWER CONSUMPTION</a>
+      <div
+        class="line"
+        [ngClass]="{ 'line-active': isPowerConsumptionActive() }"
+      ></div>
+    </div>
+    <div class="option-wrapper">
+      <a class="option" [routerLink]="['properties']">PROPERTIES</a>
+      <div
+        class="line"
+        [ngClass]="{ 'line-active': isPropertiesActive() }"
+      ></div>
+    </div>
+    <div class="option-wrapper">
+      <a class="option" [routerLink]="['permission-management']">PERMISSIONS</a>
+      <div
+        class="line"
+        [ngClass]="{ 'line-active': isPermissionsActive() }"
+      ></div>
+    </div>
+    <div class="option-wrapper" (click)="signOut()">
+      <a class="option" [routerLink]="['properties']">SING OUT</a>
+      <div class="line"></div>
+    </div>
+  </div>
+</div>

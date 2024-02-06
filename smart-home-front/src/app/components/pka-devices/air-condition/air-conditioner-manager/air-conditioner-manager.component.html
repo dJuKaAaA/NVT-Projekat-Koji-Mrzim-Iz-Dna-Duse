@@ -1,0 +1,157 @@
+<div class="container">
+  <div *ngIf="isFormOpen == false" class="top-container">
+    <div class="controller">
+      <div style="margin-right: 30px" class="input-wrapper">
+        <i class="material-icons">ac_unit</i>
+        <input
+          type="number"
+          name="plateInput"
+          placeholder="Current work temp: {{ currentWorkTemperature }}"
+          [(ngModel)]="immediateTemperature"
+        />
+      </div>
+
+      <div style="margin-right: 30px">
+        <select
+          id="immediateWorkMode"
+          name="immediateWorkMode"
+          [(ngModel)]="immediateWorkMode"
+          (change)="onModeChange()"
+        >
+          <option value="HEATING">HEATING</option>
+          <option value="COOLING">COOLING</option>
+          <option value="TEMPERATURE_MAINTENANCE">
+            TEMPERATURE MAINTENANCE
+          </option>
+          <option value="OFF">OFF</option>
+        </select>
+      </div>
+    </div>
+    <div style="margin-top: 15px">
+      <button (click)="setCurrentWorkMode()">SET</button>
+      <button (click)="openScheduleForm()">SCHEDULE</button>
+      <button (click)="openHistoryPage()">HiSTORY</button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isFormOpen == false"
+    style="display: flex; justify-content: space-evenly; flex-wrap: wrap"
+  >
+    <div
+      *ngFor="let appointment of appointments"
+      [attr.id]="appointment.id"
+      style="width: 25%; margin: 30px"
+    >
+      <div class="card">
+        <h1 style="margin-top: 5px; text-align: center">Work Plan</h1>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">schedule</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.startTime }}"
+            name="startTime"
+            readonly
+          />
+        </div>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">schedule</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.endTime }}"
+            name="endTime"
+            readonly
+          />
+        </div>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">thermostat</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.wantedTemperature }}"
+            name="temperature"
+            readonly
+          />
+        </div>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">work</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.command }}"
+            name="workMode"
+          />
+        </div>
+
+        <button
+          (click)="cancelAppointment(appointment.id)"
+          style="width: 100%; margin-top: 30px"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isFormOpen == true" class="schedule-form">
+    <div class="card">
+      <i
+        (click)="closeScheduledForm()"
+        style="cursor: pointer; margin-left: 91%; color: black"
+        class="material-icons"
+        >close</i
+      >
+      <h1 style="margin-top: 5px; text-align: center">Schedule</h1>
+      <div id="startTime" style="margin-top: 30px" class="input-wrapper">
+        <input
+          type="time"
+          placeholder=""
+          name="startTime"
+          [(ngModel)]="scheduledStartTime"
+        />
+      </div>
+      <div style="margin-top: 30px" class="input-wrapper">
+        <input
+          id="endTime"
+          type="time"
+          name="endTime"
+          [(ngModel)]="scheduledEndTime"
+        />
+      </div>
+
+      <div style="margin-top: 30px" class="input-wrapper">
+        <i class="material-icons">thermostat</i>
+        <input
+          type="number"
+          placeholder="Temperature"
+          name="temperature"
+          [(ngModel)]="scheduledTemperature"
+        />
+      </div>
+
+      <div style="margin-top: 30px">
+        <select
+          style="width: 100%"
+          id="scheduledWorkMode"
+          name="scheduledWorkMode"
+          [(ngModel)]="scheduledWorkMode"
+        >
+          <option value="PERIODIC_HEATING">HEATING</option>
+          <option value="PERIODIC_COOLING">COOLING</option>
+          <option value="PERIODIC_TEMPERATURE_MAINTENANCE">
+            TEMPERATURE MAINTENANCE
+          </option>
+        </select>
+      </div>
+
+      <button
+        (click)="scheduleAppointment()"
+        style="width: 100%; margin-top: 30px"
+      >
+        ACCEPT
+      </button>
+    </div>
+  </div>
+</div>

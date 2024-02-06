@@ -1,0 +1,17 @@
+.card-flex {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  height: 33px;
+  width: fit-content;
+  padding: 0 10px;
+}
+
+p {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: rgb(var(--error-color));
+}

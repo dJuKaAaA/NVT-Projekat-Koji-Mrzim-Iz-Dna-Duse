@@ -1,0 +1,36 @@
+<div class="page">
+  <div class="card-wrapper">
+    <div class="first-row">
+      <div class="card card-commands">
+        <div class="image-container">
+          <img *ngIf="imgPresent" [src]="imageBlob" alt="sprinkler-system-image"/>
+          <div class="title">{{ sprinklerSystem.name }} • {{ sprinklerSystem.systemOn ? "On" : "Off" }}</div>
+        </div>
+        <div style="display: flex; flex-direction: column">
+          <h2>Commands</h2>
+          <button class="outline-button" *ngIf="!sprinklerSystem.systemOn" (click)="turnOn()">Turn On</button>
+          <button class="outline-button" *ngIf="sprinklerSystem.systemOn" (click)="turnOff()">Turn Off</button>
+
+
+          <button class="outline-button" (click)="addSchedule()">Create Schedule</button>
+          <button class="outline-button" [disabled]="!scheduleChanged" (click)="saveSchedules()">Save Schedule changes</button>
+        </div>
+      </div>
+      <div class="schedule-list">
+        <div *ngFor="let schedule of editedSchedules; let i = index" style="margin-top: -5px; margin-bottom: 5px">
+          <app-schedule-card
+            [schedule]="{index: i, item: schedule}"
+            [showInfoText]="false"
+            (changedSchedule)="editSchedule($event)"
+            (clickedClear)="removeSchedule($event)" />
+        </div>
+      </div>
+    </div>
+
+    <app-sprinkler-system-history-actions-table
+      [sprinklerSystemId]="sprinklerSystem.id"
+      [tableItem]="actionTableItem"/>
+    <app-online-offline-graph [deviceId]="sprinklerSystemId"/>
+
+  </div>
+</div>

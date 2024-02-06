@@ -1,0 +1,43 @@
+<div class="page">
+  <div style="display: flex; flex-direction: column; gap: 20px">
+    <div class="card-wrapper">
+
+      <div class="card card-commands">
+        <div class="image-container">
+          <img *ngIf="imgPresent" [src]="imageBlob" />
+          <div class="title">{{ lamp.name }} • {{lamp.lightLevel | number:'1.0-0'}}%</div>
+        </div>
+
+        <div>
+          <h2>Commands</h2>
+          <div class="checkbox-wrapper" style="margin-top: 50px">
+            <input
+              [disabled]="lamp.autoModeOn"
+              class="checkbox-square"
+              type="checkbox"
+              placeholder='Bulb On'
+              [(ngModel)]="lamp.bulbOn"
+              (change)="setBulb()"
+              name="lampBulb"/>
+            <label>Bulb On</label>
+          </div>
+          <div class="checkbox-wrapper">
+            <input
+              class="checkbox-square"
+              type="checkbox"
+              placeholder='Auto Mode'
+              [(ngModel)]="lamp.autoModeOn"
+              (click)="setAuto()"
+              name="autoModeOn"/>
+            <label>Auto Mode</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-lamp-actions-table [lampId]="lampId" [tableItem]="commandTableItem"/>
+    <app-lamp-light-level-graph [lampId]="lampId" [graphItem]="lightLevelGraphItem"/>
+    <app-lamp-bulb-on-graph [lampId]="lampId" [graphItem]="bulbOnGraphItem"/>
+    <app-online-offline-graph [deviceId]="lampId"/>
+  </div>
+</div>

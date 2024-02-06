@@ -1,0 +1,70 @@
+<div class="page">
+    <div class="card-wrapper">
+        <div class="first-row">
+            <div class="card card-commands">
+                <div class="image-container">
+                    <img *ngIf="imgPresent" [src]="imageBlob" alt="vehicle-gate-image"/>
+                    <div class="title">{{ gate.name }} • {{ gate.open ? "Open" : "Close" }}</div>
+                </div>
+
+                <div>
+                    <h2>Commands</h2>
+                    <div class="checkbox-wrapper" style="margin-top: 20px;">
+                        <input
+                            [disabled]="gate.alwaysOpen"
+                            class="checkbox-square"
+                            type="checkbox"
+                            placeholder='Private Mode'
+                            [(ngModel)]="gate.privateMode"
+                            (change)="setMode()"
+                            name="gateMode"/>
+                        <label>Private Mode</label>
+                    </div>
+                    <button *ngIf="!gate.alwaysOpen" style="width: 100%" class='outline-button' (click)="changeIsOpen()">OPEN GATE</button>
+                    <button *ngIf="gate.alwaysOpen" style="width: 100%" class='outline-button' (click)="changeIsOpen()">CLOSE GATE</button>
+                    <button [disabled]="!platesChanges" style="width: 100%" class='outline-button' (click)="changeVehiclePlates()">SAVE CHANGES</button>
+                </div>
+            </div>
+
+            <app-gate-more-info-card [carPlates]="editedPlates" (onPlatesChanged)="changePlates($event)" />
+
+            <div class="card info-card">
+                <h2>Outside Info</h2>
+                    <div class="description-item">
+                        <label>Plate:</label>
+                        <p><b>{{ gate.lastLicencePlateIn == null ? "No Data" : gate.lastLicencePlateIn }}</b></p>
+                    </div>
+                    <div class="description-item">
+                        <label>Time:</label>
+                        <p><b><ng-container *ngIf="gate.lastInDate; else noData">{{ gate.lastInDate | date:'dd-MM-yyyy HH:mm:ss' }}</ng-container></b></p>
+                        <ng-template #noData>No Data</ng-template>
+                    </div>
+                    <div class="description-item">
+                        <label>Status:</label>
+                        <p><b>{{ lastCommand }}</b></p>
+                    </div>
+            </div>
+
+            <div class="card info-card">
+                <h2>Inside Info</h2>
+                <div class="description-item">
+                    <label>Plate:</label>
+                    <p><b>{{ gate.lastLicencePlateOut == null ? "No Data" : gate.lastLicencePlateOut }}</b></p>
+                </div>
+                <div class="description-item">
+                    <label>Time:</label>
+                    <p><b><ng-container *ngIf="gate.lastOutDate; else noData">{{ gate.lastOutDate | date:'dd-MM-yyyy HH:mm:ss' }}</ng-container></b></p>
+                    <ng-template #noData>No Data</ng-template>
+                </div>
+                <div class="description-item">
+                    <label>Status: </label>
+                    <p><b>{{ gate.lastLicencePlateOut == null ? 'No Data' : 'Go Outside' }}</b></p>
+                </div>
+            </div>
+
+        </div>
+      <app-gate-in-out-history-table [gateId]="gateId" [graphItem]="inOutGraphItem"/>
+      <app-gate-actions-history-table [vehicleGateId]="gateId" [tableItem]="plateInfoItem"/>
+      <app-online-offline-graph [deviceId]="gateId"/>
+    </div>
+</div>

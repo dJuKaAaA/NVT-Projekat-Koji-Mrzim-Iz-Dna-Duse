@@ -1,0 +1,41 @@
+<div class="table" [hidden]="isFilterOpen">
+  <!-- <div class="switch">
+    <app-toggle-switch
+      (onToggleEvent)="toggleDevice($event)"
+      [isChecked]="isDeviceOn"
+    ></app-toggle-switch>
+  </div> -->
+  <div class="history-container">
+    <div class="history-row header">
+      <div class="executor">Executor</div>
+      <div class="action">Action</div>
+      <div class="timestamp">Timestamp</div>
+    </div>
+    <div *ngFor="let history of dataToDisplay">
+      <div class="history-row">
+        <div class="user">{{ history.executor }}</div>
+        <div class="action">{{ history.action.split('_').join(' ') }}</div>
+        <div class="timestamp">{{ history.timestamp }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="buttons-container">
+    <button (click)="openFilterForm()" style="align-self: center">
+      FILTER
+    </button>
+    <button *ngIf="!isFirstPage()" (click)="previousPage()">PREVIOUS</button>
+    <button *ngIf="!isLastPage" (click)="nextPage()">NEXT</button>
+  </div>
+<!--  <p></p>-->
+
+  <div style="padding: 20px">
+    <app-online-offline-graph [deviceId]="deviceId"/>
+  </div>
+</div>
+
+<div #filterForm class="center-filter" *ngIf="isFilterOpen">
+  <app-washing-machine-more-info-filter
+    (closeEvent)="closeFilterForm()"
+    (applyFilterEvent)="applyFilter($event)"
+  ></app-washing-machine-more-info-filter>
+</div>

@@ -1,0 +1,79 @@
+<div class="card">
+  <h2>Command Table</h2>
+  <div class="parameters-wrapper">
+
+    <div style="display: flex; gap: 30px">
+      <div>
+        <app-time-range-dropdown-select (onSelect)="onTimeSelect($event)"/>
+        <p *ngIf="haveError">{{ errorMessage }}</p>
+      </div>
+      <div class="dropdown">
+        <div class="input-wrapper" style="width: 150px">
+          <i class="material-icons">filter_list</i>
+          <input
+            readonly
+            (click)="onDropdownInputClick()"
+            placeholder="Mode"
+            [value]="modeFilterShow"
+            [ngStyle]="modeFilter === '' ? {'opacity': '0.8'} : {}"
+          />
+        </div>
+        <div id="myDropdown" class="dropdown-content" *ngIf="openedDropdown" style="width: 150px">
+          <a (click)="onSelect('')">None</a>
+          <a (click)="onSelect('MANUAL_MODE')">Manual Mode</a>
+          <a (click)="onSelect('AUTO_MODE')">Auto Mode</a>
+        </div>
+      </div>
+
+      <div class="triggered-by-input" style="max-height: 43px">
+        <div class="tooltip">
+          <div class="input-wrapper">
+            <i class="material-icons">filter_list</i>
+            <input placeholder="Triggered By" [(ngModel)]="triggeredBy" name="triggeredBy" />
+          </div>
+          <span class="tooltiptext">Action can triggered by user or system (input SYSTEM for search).</span>
+        </div>
+        <div class="tooltip">
+          <button class="outline-button" (click)="populateInput()" [disabled]="triggeredBy == 'SYSTEM'"><i class="material-icons">schedule</i></button>
+          <span class="tooltiptext">Automatically populate the input field with the keyword "SYSTEM" to search for actions performed by the system.</span>
+        </div>
+        <div class="tooltip">
+          <button class="outline-button" (click)="clearInput()" [disabled]="triggeredBy == ''"><i class="material-icons">clear</i></button>
+          <span class="tooltiptext tooltiptext-little">Clear input field.</span>
+        </div>
+      </div>
+    </div>
+
+    <app-start-end-date-input
+      *ngIf="isDateRange"
+      (onShow)="onCustomDate($event)"
+      (dateChanged)="onDateChange($event)"
+      [isButtonDisabled]="!isButtonEnabled()"
+    />
+    <button *ngIf="!isDateRange" class="raised-button" (click)="displayData()" [disabled]="!isButtonEnabled()">Show</button>
+  </div>
+
+  <div *ngIf="commands.length != 0">
+    <div class="table-header">
+      <div class="header-item">Command</div>
+      <div class="header-item">Triggered By</div>
+      <div class="header-item">Mode</div>
+      <div class="header-item">Time</div>
+    </div>
+    <div class="table">
+      <div class="table-content" *ngFor="let command of commands">
+        <div class="table-row">
+          <div class="table-data">{{getTableString(command.command)}}</div>
+          <div class="table-data">{{getTableString(command.triggeredBy)}}</div>
+          <div class="table-data">{{getTableString(command.mode)}}</div>
+          <div class="table-data">{{command.timestamp | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="commands.length == 0" class="no-data">
+    <h2>No Data</h2>
+  </div>
+
+</div>

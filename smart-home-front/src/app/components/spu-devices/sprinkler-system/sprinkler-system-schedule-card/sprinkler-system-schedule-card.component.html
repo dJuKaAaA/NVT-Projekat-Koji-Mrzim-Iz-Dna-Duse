@@ -1,0 +1,10 @@
+<div>
+  <button (click)="addSchedule()" class="raised-button">Add Schedule</button>
+  <div *ngFor="let schedule of schedules; let i = index">
+    <app-schedule-card
+      [schedule]="{index: i, item: schedule}"
+      (changedSchedule)="editSchedule($event)"
+      (clickedClear)="removeSchedule($event)"/>
+  </div>
+</div>
+

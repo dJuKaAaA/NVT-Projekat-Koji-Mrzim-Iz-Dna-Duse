@@ -1,0 +1,74 @@
+<dialog id="dialog-send-request">
+    <div class="flex-center-item">
+        <p style="text-align: center;">Your real estate request has been submitted. <br> Please wait while the administrator approves this property.</p>
+        <button class="raised-button" autofocus (click)="closeDialog()">DONE</button>
+    </div>
+</dialog>
+
+<div class="page">
+    <form  [formGroup]="form" class="flex-center-item" style="justify-content: start;">
+
+        <div
+            class="picture flex-center-item"
+            [ngClass]="{'error-wrapper': showError && !isImageUploaded}"
+            [ngStyle]="isImageUploaded ? {'background-image': 'url(' + imageUrl + ')', 'background-size': 'cover' } : {}"
+            (click)="openFileInput()"
+        >
+            <i *ngIf="!isImageUploaded" class="material-icons" [ngClass]="{'error-icon': showError && !isImageUploaded}">image</i>
+            <input type="file" #fileInput style="display: none" (change)="onImageUpload($event)"/>
+        </div>
+
+        <div class='input-wrapper' [ngClass]="{'error-input': isInputErr('propertyName')}">
+            <i class="material-icons" [ngClass]="{'error-icon': isInputErr('propertyName')}">home</i>
+            <input placeholder='Property name' formControlName="propertyName"/>
+        </div>
+
+        <div class='input-wrapper' [ngClass]="{'error-input': isInputErr('propertyFloors')}">
+            <i class="material-symbols-outlined" [ngClass]="{'error-icon': isInputErr('propertyFloors')}">floor</i>
+            <input placeholder='Floors' type="number" min="1" formControlName="propertyFloors"/>
+        </div>
+
+        <div class='input-wrapper' [ngClass]="{'error-input': isInputErr('propertyArea')}">
+            <i class="material-icons" [ngClass]="{'error-icon': isInputErr('propertyArea')}">crop</i>
+            <input placeholder='Area [m²]' type="number" min="1" formControlName="propertyArea"/>
+        </div>
+
+        <div class='input-wrapper' [ngClass]="{'error-input': isInputErr('propertyAddress')}">
+            <i class="material-symbols-outlined" [ngClass]="{'error-icon': isInputErr('propertyAddress')}">signpost</i>
+            <input placeholder='Address' formControlName="propertyAddress"/>
+        </div>
+
+        <div class="dropdown">
+            <div class='input-wrapper' [ngClass]="{'error-input': isInputErr('propertyCityCountry')}">
+                <i class="material-icons" [ngClass]="{'error-icon': isInputErr('propertyCityCountry')}">location_city</i>
+                <input
+                    (click)="onDropdownInputClick()"
+                    (keyup)="onDropdownInputValueChange($event)"
+                    (blur)="loseFocus()"
+                    placeholder='City, Country'
+                    formControlName="propertyCityCountry"/>
+            </div>
+            <div id="myDropdown" class="dropdown-content" *ngIf="openedDropdown">
+                <div *ngFor="let option of shownCityCountryOptions">
+                    <a (click)="onSelect(option)">{{option.name}}, {{option.countryName}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="radio-inputs">
+            <label class="radio">
+              <input type="radio" formControlName="propertyType" value="h" checked="">
+              <span class="name">HOME</span>
+            </label>
+            <label class="radio">
+              <input type="radio" formControlName="propertyType" value="a">
+              <span class="name">APARTMENT</span>
+            </label>
+        </div>
+        <button type="submit" class='raised-button' (click)="submit()">SEND REQUEST</button>
+    </form>
+
+    <div class="map-wrapper" [ngClass]="{'error-wrapper': showError && marker == null}">
+        <div id="map"></div>
+    </div>
+</div>

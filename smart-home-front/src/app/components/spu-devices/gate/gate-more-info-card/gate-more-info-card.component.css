@@ -1,0 +1,42 @@
+.card {
+    padding: 20px 30px;
+}
+
+h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.input-wrapper { width: 300px;}
+
+.chips-flex {
+    display: flex;
+    width: 300px;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 17px;
+}
+
+.chip {
+    padding: 2px 8px;
+    border-radius: var(--card-radius);
+    font-size: 14px;
+    background-color: rgba(var(--primary-light), 0.2);
+    transition: background-color 0.2s ease;
+}
+
+.chip:hover {
+    cursor: pointer;
+    background-color: rgba(var(--primary-light), 0.3);
+}
+
+.error-message {
+    margin: -5px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(var(--error-color));
+}
+
+.input-wrapper {
+  margin-top: 16px;
+}

@@ -1,0 +1,72 @@
+<div class="container">
+  <div>
+    <div class="close-icon-container">
+      <i (click)="closeFilterForm()" class="material-icons close-icon">close</i>
+    </div>
+    <h1 style="text-align: center">Filter</h1>
+
+    <div>
+      <div class="left-flex">
+        <label class="margin-2" for="property">Email:</label>
+        <input
+          class="checkbox margin-2"
+          type="checkbox"
+          [(ngModel)]="isFilteredByEmail"
+        />
+      </div>
+      <input
+        class="email-input"
+        type="text"
+        placeholder="Enter user email"
+        [disabled]="!isFilteredByEmail"
+        [(ngModel)]="email"
+      />
+    </div>
+
+    <div class="date-container">
+      <div class="left-flex">
+        <label class="margin-2" for="property">Property:</label>
+
+        <input
+          class="checkbox margin-2"
+          type="checkbox"
+          [(ngModel)]="isFilteredByProperty"
+        />
+      </div>
+
+      <input
+        type="text"
+        placeholder="Enter Property Name"
+        [disabled]="!isFilteredByProperty"
+        [(ngModel)]="propertyName"
+      />
+
+      <div class="left-flex">
+        <label class="margin-2" for="property">Device:</label>
+
+        <input
+          class="checkbox margin-2"
+          type="checkbox"
+          [(ngModel)]="isFilteredByDevice"
+        />
+      </div>
+
+      <input
+        type="text"
+        placeholder="Enter Device Name"
+        [disabled]="!isFilteredByDevice"
+        [(ngModel)]="deviceName"
+      />
+    </div>
+
+    <button
+      type="button"
+      (click)="applyFilters()"
+      [disabled]="
+        !isFilteredByEmail && !isFilteredByProperty && !isFilteredByDevice
+      "
+    >
+      Apply Filter
+    </button>
+  </div>
+</div>

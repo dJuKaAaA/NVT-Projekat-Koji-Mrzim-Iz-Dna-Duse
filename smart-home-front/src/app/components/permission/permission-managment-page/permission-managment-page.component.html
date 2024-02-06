@@ -1,0 +1,120 @@
+<div *ngIf="!isFilterOpen" class="container">
+  <div>
+    <form [formGroup]="addEmailForm">
+      <input
+        class="margin-10-left"
+        type="email"
+        placeholder="user email"
+        formControlName="email"
+        (keyup)="onAddEmailChange()"
+      />
+    </form>
+    <select
+      class="margin-10-left"
+      [(ngModel)]="addProperty"
+      (change)="onAddPropertyChange()"
+    >
+      <option [ngValue]="null" selected disabled hidden>Select property</option>
+      <option *ngFor="let property of properties" [ngValue]="property">
+        {{ property.name }}
+      </option>
+    </select>
+
+    <select
+      class="margin-10-left"
+      [(ngModel)]="addDevice"
+      [disabled]="isAddDeviceSelectDisabled"
+      (change)="onAddDeviceChange()"
+    >
+      <option [ngValue]="null" selected disabled hidden>Select device</option>
+      <option [ngValue]="'ALL'">All</option>
+      <option *ngFor="let device of addDevices" [ngValue]="device">
+        {{ device.name }}
+      </option>
+    </select>
+
+    <button
+      class="margin-10-left"
+      [disabled]="!isAddButtonEnabled"
+      (click)="onAdd()"
+    >
+      Add
+    </button>
+  </div>
+
+  <div>
+    <form [formGroup]="removeEmailForm">
+      <input
+        class="margin-10-left"
+        type="email"
+        placeholder="user email"
+        formControlName="email"
+        (keyup)="onRemoveEmailChange()"
+      />
+    </form>
+
+    <select
+      class="margin-10-left"
+      [(ngModel)]="removeProperty"
+      (change)="onRemovePropertyChange()"
+    >
+      <option [ngValue]="null" selected disabled hidden>Select property</option>
+      <option *ngFor="let property of properties" [ngValue]="property">
+        {{ property.name }}
+      </option>
+    </select>
+
+    <select
+      class="margin-10-left"
+      [(ngModel)]="removeDevice"
+      [disabled]="isRemoveDeviceSelectDisabled"
+      (change)="onRemoveDeviceChange()"
+    >
+      <option [ngValue]="null" selected disabled hidden>Select device</option>
+      <option [ngValue]="'ALL'">All</option>
+      <option *ngFor="let device of removeDevices" [ngValue]="device">
+        {{ device.name }}
+      </option>
+    </select>
+
+    <button
+      class="margin-10-left"
+      [disabled]="!isRemoveButtonEnable"
+      (click)="onRemove()"
+    >
+      Remove
+    </button>
+  </div>
+
+  <div class="table" [hidden]="false">
+    <div class="permissions-container">
+      <div class="permissions-row header">
+        <div class="user">User</div>
+        <div class="property">Property</div>
+        <div class="device">Device</div>
+        <div class="action">Action</div>
+      </div>
+      <div *ngFor="let permission of permissions">
+        <div class="permissions-row">
+          <div class="user">{{ permission.permissionReceiver.email }}</div>
+          <div class="property">{{ permission.property.name }}</div>
+          <div class="device">{{ permission.device.name }}</div>
+          <div class="action">
+            <button (click)="removePermission(permission.id)">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fixed-button-container">
+    <button (click)="reset()" style="margin-right: 10px">RESET</button>
+    <button (click)="openFilterForm()">FILTER</button>
+  </div>
+</div>
+<div *ngIf="isFilterOpen" #filterForm class="center-filter">
+  <app-filter-permissions
+    (closeEvent)="closeFilterForm()"
+    (applyFilterEvent)="applyFilter($event)"
+  ></app-filter-permissions>
+</div>

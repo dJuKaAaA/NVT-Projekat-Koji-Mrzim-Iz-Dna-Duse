@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="flex-center-item">
+    <h1 class="title">Let's start!</h1>
+    <div
+      [ngStyle]="
+        imageUploaded
+          ? {
+              'background-image': 'url(' + imageUrl + ')',
+              'background-size': 'cover'
+            }
+          : {}
+      "
+      (click)="openFileInput()"
+      class="picture flex-center-item"
+    >
+      <i *ngIf="!imageUploaded" class="material-icons">image</i>
+      <input
+        type="file"
+        #fileInput
+        style="display: none"
+        (change)="onImageUpload($event)"
+      />
+    </div>
+    <div class="input-wrapper">
+      <i class="material-icons">person</i>
+      <input [(ngModel)]="name" placeholder="Name" />
+    </div>
+    <div class="input-wrapper">
+      <i class="material-icons">mail</i>
+      <input [(ngModel)]="email" placeholder="Email" />
+    </div>
+    <div class="input-wrapper">
+      <i class="material-icons">lock</i>
+      <input [(ngModel)]="password" placeholder="Password" type="password" />
+    </div>
+    <button (click)="createAccount()" class="raised-button">
+      CREATE ACCOUNT
+    </button>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<dialog [attr.id]="dialog_id">
+    <div class="flex-center-item">
+        <div class='input-wrapper' style="width: 300px;">
+            <i class="material-symbols-outlined">unpublished</i>
+            <textarea placeholder='Reason' [(ngModel)]="reason" maxlength="255"></textarea>
+        </div>
+        <div class="buttons" style="width: 300px;">
+            <button class="raised-button" autofocus (click)="cancelDialogButton()">CANCEL</button>
+            <button class="outline-button" autofocus (click)="denyDialogButton()" [disabled]="!this.reason.trim()">SEND DENY</button>
+        </div>
+    </div>
+</dialog>
+
+<div class="card" [ngClass]="{'clickable-card': property!.status.toString() === 'APPROVED'}" (click)="goToDevices()">
+    <div class="image-container">
+        <img *ngIf="imgPresent" [src]="imageBlob">
+        <div class="title">{{property?.name}}</div>
+    </div>
+    <div>
+        <div class="description-item">
+            <i class="material-symbols-outlined">home_work</i>
+            <p>{{getType()}}</p>
+        </div>
+        <div class="description-item">
+            <i class="material-symbols-outlined">floor</i>
+            <p>{{property?.floors}}</p>
+        </div>
+        <div class="description-item">
+            <i class="material-icons">crop</i>
+            <p>{{property?.area}}m²</p>
+        </div>
+        <div class="description-item">
+            <i class="material-symbols-outlined">signpost</i>
+            <p>{{property?.address}}</p>
+        </div>
+        <div class="description-item">
+            <i class="material-icons">location_city</i>
+            <p>{{property?.city?.name}}, {{property?.city?.countryName}}</p>
+        </div>
+        <div *ngIf="!isAdmin" class="description-item">
+            <i class="material-symbols-outlined">person_check</i>
+            <p>{{getStatus()}}</p>
+        </div>
+        <div *ngIf="isAdmin" class="buttons">
+            <button class='raised-button' style="width: 50%;" (click)="approveRequest()">APPROVE</button>
+            <button class='outline-button' style="width: 50%;" (click)="showDialog()">DENY</button>
+        </div>
+    </div>
+</div>

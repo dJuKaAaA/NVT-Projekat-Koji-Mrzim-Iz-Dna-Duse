@@ -1,0 +1,140 @@
+<div class="container">
+  <div>
+    <div class="command-container">
+      <div>
+        <input
+          class="local_input"
+          type="text"
+          readonly
+          value="{{ currentWorkMode }}"
+        />
+      </div>
+      <div class="controll-buttons">
+        <button (click)="openScheduleForm()">SCHEDULE</button>
+        <button (click)="openHistoryPage()" class="history-button">
+          HISTORY
+        </button>
+      </div>
+    </div>
+    <div class="wash-program-setter">
+      <div>
+        <select
+          class="wash-program-setter-select"
+          id="immediateWorkMode"
+          name="immediateWorkMode"
+          [(ngModel)]="immediateWorkMode"
+        >
+          <option value="STANDARD_WASH_PROGRAM" selected>
+            STANDARD WASH PROGRAM
+          </option>
+          <option value="COLOR_WASH_PROGRAM">COLOR WASH PROGRAM</option>
+          <option value="WASH_PROGRAM_FOR_DELICATES">
+            WASH PROGRAM FOR DELICATES
+          </option>
+        </select>
+      </div>
+      <button (click)="setCurrentWorkMode()">SET</button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isFormOpen == false"
+    style="display: flex; justify-content: space-evenly; flex-wrap: wrap"
+  >
+    <div
+      *ngFor="let appointment of appointments"
+      [attr.id]="appointment.id"
+      style="width: 25%; margin: 30px"
+    >
+      <div class="card">
+        <h1 style="margin-top: 5px; text-align: center">Work Plan</h1>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">schedule</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.startTime }}"
+            name="startTime"
+            readonly
+          />
+        </div>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">schedule</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.endTime }}"
+            name="endTime"
+            readonly
+          />
+        </div>
+
+        <div style="width: 100%; margin-top: 30px" class="input-wrapper">
+          <i class="material-icons">work</i>
+          <input
+            type="text"
+            placeholder="{{ appointment.command }}"
+            name="workMode"
+            readonly
+          />
+        </div>
+
+        <button
+          (click)="cancelAppointment(appointment.id)"
+          style="width: 100%; margin-top: 30px"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isFormOpen == true" class="schedule-form">
+    <div class="card">
+      <i
+        (click)="closeScheduledForm()"
+        style="cursor: pointer; margin-left: 91%; color: black"
+        class="material-icons"
+        >close</i
+      >
+      <h1 style="margin-top: 5px; text-align: center">Schedule</h1>
+      <div
+        id="startTime"
+        style="margin-top: 30px; width: 100%"
+        class="input-wrapper"
+      >
+        <input
+          type="time"
+          placeholder=""
+          name="startTime"
+          [(ngModel)]="scheduledStartTime"
+        />
+      </div>
+      <div>
+        <select
+          style="width: 100%"
+          id="scheduledWorkMode"
+          name="scheduledWorkMode"
+          [(ngModel)]="scheduledWorkMode"
+        >
+          <option value="SCHEDULED_STANDARD_WASH_PROGRAM">
+            STANDARD WASH PROGRAM
+          </option>
+          <option value="SCHEDULED_COLOR_WASH_PROGRAM">
+            COLOR WASH PROGRAM
+          </option>
+          <option value="SCHEDULED_WASH_PROGRAM_FOR_DELICATES,">
+            WASH PROGRAM FOR DELICATES
+          </option>
+        </select>
+      </div>
+
+      <button
+        (click)="scheduleAppointment()"
+        style="width: 100%; margin-top: 30px"
+      >
+        ACCEPT
+      </button>
+    </div>
+  </div>
+</div>

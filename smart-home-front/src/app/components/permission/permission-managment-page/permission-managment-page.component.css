@@ -1,0 +1,101 @@
+.container {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+form {
+    display: inline;
+}
+
+button {
+    background-color: rgb(219, 117, 83);
+    width: 150px;
+    padding: 11px;
+    margin-top: 0;
+}
+
+input {
+    background-color: white;
+    padding: 10px;
+    width: 250px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+select {
+    padding: 13px;
+}
+
+.margin-10-left {
+    margin-left: 10px;
+}
+
+
+.fixed-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.table {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.permissions-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.permissions-row {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+
+.header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.permissions-row > div {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user {
+    flex: 1;
+}
+
+.property {
+    flex: 2;
+}
+
+.device {
+    flex: 3;
+}
+
+.action {
+    flex: 4;
+}
+
+.center-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}

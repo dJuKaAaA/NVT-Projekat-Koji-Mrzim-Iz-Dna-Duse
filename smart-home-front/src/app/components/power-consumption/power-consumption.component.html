@@ -1,0 +1,70 @@
+<dialog id="dialog">
+  <div class="flex-center-item">
+    <p style="text-align: center;">{{ dialogMessage }}</p>
+    <button class="raised-button" autofocus (click)="closeDialog()">DONE</button>
+  </div>
+</dialog>
+
+<div class="graphs-container">
+  <div class="container">
+    <app-graph
+      #graph1
+      [graphTitle]="'Power consumption'"
+      [pointTitle]="'Energy'"
+      [yAxisTitle]="'Timestamp'"
+      [dataSeries]="powerConsumptionDataSeries"
+      [visible]="true"
+    ></app-graph>
+  </div>
+</div>
+
+<div class="flex-container">
+  <div class="custom-select">
+    <select [(ngModel)]="selectedPeriod" (change)="onPeriodChange($event)">
+      <option value="" *ngIf="!selectedPeriod" disabled selected>
+        Choose period
+      </option>
+      <option value="REAL_TIME">Real Time</option>
+      <option value="H6">6h</option>
+      <option value="H12">12h</option>
+      <option value="H24">24h</option>
+      <option value="W1">1w</option>
+      <option value="M1">1m</option>
+      <option value="CUSTOM_DATE">Custom Date</option>
+    </select>
+    <select [(ngModel)]="powerConsumptionType" (change)="onPowerConsumptionTypeChange($event)">
+      <option value="" *ngIf="!selectedPeriod" disabled selected>
+        Choose consumption type
+      </option>
+      <option value="CONSUMED">Consumed</option>
+      <option value="TAKEN_FROM_NETWORK">Taken from network</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedPeriod === 'CUSTOM_DATE'" class="datepicker-container">
+    <label for="datepickerStartDate">Select Start Date:</label>
+    <input
+      type="date"
+      id="datepickerStartDate"
+      name="datepicker"
+      [(ngModel)]="startDateTime"
+    />
+  </div>
+
+  <div *ngIf="selectedPeriod === 'CUSTOM_DATE'" class="datepicker-container">
+    <label for="datepickerEndDate">Select End Date:</label>
+    <input
+      type="date"
+      id="datepickerEndDate"
+      name="datepicker"
+      [(ngModel)]="endDateTime"
+    />
+  </div>
+  <button
+    class="display-button"
+    (click)="displayData()"
+  >
+    DISPLAY
+  </button>
+
+</div>

@@ -1,0 +1,141 @@
+<dialog id="dialog">
+  <div class="flex-center-item">
+    <p style="text-align: center;">{{ dialogMessage }}</p>
+    <button class="raised-button" autofocus (click)="closeDialog()">DONE</button>
+  </div>
+</dialog>
+
+<div class="page">
+  <div class="grid-spacing-columns">
+    <div>
+      <div class="card charger-info">
+        <h2>Charger info</h2>
+        <div style="text-align: left; margin: 10px 20px;">
+          <p>Charge power: <b>{{ device.chargePower }}kW</b></p>
+          <p>Chargers occupied: <b>{{ device.chargersOccupied }}</b></p>
+          <p>Chargers available: <b>{{ device.chargerCount - device.chargersOccupied }}</b></p>
+          <div class="charge-limit">
+            <div>
+              Charge limit: <b *ngIf="!changeChargeLimitVisible">{{ device.chargeLimit }}%</b>
+            </div>
+            <div class="change-charge-limit" *ngIf="!changeChargeLimitVisible" (click)="setChangeChargeLimitVisible()">
+              <a>Change</a>
+            </div>
+            <div style="display: inline-block">
+              <div *ngIf="changeChargeLimitVisible" style="display: flex; justify-content: left; align-items: center">
+                <div style="margin-right: 15px">
+                  <div class='input-wrapper' style="width: 70px">
+                    <input placeholder='' type="number" [(ngModel)]="changedChargeLimit" name="changedChargeLimit"/>
+                    <b>%</b>
+                  </div>
+                </div>
+                <div class="change-charge-limit" style="margin-right: 10px" (click)="setChargeLimit()">
+                  <a>Change</a>
+                </div>
+                <div class="change-charge-limit" (click)="setChangeChargeLimitVisible()">
+                  <a>Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="charge-status-container card">
+        <h2>Vehicles being charged</h2>
+        <div *ngFor="let vehicle of device.vehiclesCharging" class="charge-status">
+          <div style="display: flex; align-items: center">
+            <p style="text-align: left">{{ (vehicle.currentPower / vehicle.maxPower * 100) | number: '1.0-0' }}% {{ vehicle.currentPower == vehicle.maxPower ? ('Fully charged') : ('')}}</p>
+            <div class="change-charge-limit" style="margin-left: 20px" (click)="stopCharging(vehicle.id)">
+              <a>Unplug</a>
+            </div>
+          </div>
+          <div class="charge-border">
+            <div
+              style="height: 25px;"
+              [style.width.%]="vehicle.currentPower / vehicle.maxPower * 100"
+              [style.background-color]="vehicle.currentPower / vehicle.maxPower > 0.30 ? (vehicle.currentPower / vehicle.maxPower > 0.80 ? ('#1dc500') : ('#f0da1f')) : '#d03b3b'"
+            ></div>
+          </div>
+        </div>
+        <div *ngFor="let vehicle of availableSpacesForCharging" style="margin: 0px 20px">
+          <h4 style="text-align: left">Available</h4>
+          <div class="charge-border">
+            <div style="height: 25px"></div>
+          </div>
+          <div class="flex-items-center" style="justify-content: space-evenly">
+            <div class="flex-items-center">
+              <label>Current power</label>
+              <div class='input-wrapper' style="width: 70px" >
+                <input placeholder='' type="number" [(ngModel)]="vehicle.currentPower" name="currentPower"/>
+              </div>
+            </div>
+            <div class="flex-items-center">
+              <label>Max power</label>
+              <div class='input-wrapper' style="width: 70px">
+                <input placeholder='' type="number" [(ngModel)]="vehicle.maxPower" name="maxPower"/>
+              </div>
+            </div>
+            <div class="change-charge-limit" style="margin-right: 10px;" (click)="startCharging(vehicle)">
+              <a>Plug in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="display: grid; grid-template-rows: 70% 30%; height: 100%; width: 100%; margin: 20px 20px">
+      <div style="background-color: #fff; border-radius: 15px; overflow: hidden; max-height: 75vh">
+        <table class="simple-table">
+          <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Action</th>
+            <th>User</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let entry of dataSource">
+            <td>{{ entry.timestamp.toUTCString() }}</td>
+            <td>{{ entry.action }}</td>
+            <td>{{ entry.user }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: space-evenly; align-items: center">
+        <select (change)="onUserChange($event)">
+          <option value="N/A">Select a user</option>
+          <option value="ALL">All</option>
+          <option *ngFor="let user of users">{{ user.email }}</option>
+        </select>
+
+        <div class="datepicker-container">
+          <label for="datepickerStartDate">Select Start Date:</label>
+          <input
+            type="date"
+            id="datepickerStartDate"
+            name="datepickerStart"
+            [(ngModel)]="startDateTime"
+          />
+        </div>
+        <div class="datepicker-container">
+          <label for="datepickerEndDate">Select End Date:</label>
+          <input
+            type="date"
+            id="datepickerEndDate"
+            name="datepickerEnd"
+            [(ngModel)]="endDateTime"
+          />
+        </div>
+        <button class="raised-button" (click)="search()">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 20px">
+    <app-online-offline-graph [deviceId]="deviceId"/>
+  </div>
+</div>
+
+

@@ -1,0 +1,48 @@
+<div class="page">
+  <div *ngIf="!isEmptyList" class="title-box">
+    <h1 class="title-text">{{ isAdmin ? "Requests" : "Your properties" }}</h1>
+    <button
+      *ngIf="!isAdmin"
+      class="raised-button"
+      style="width: 100px; margin: 0"
+      (click)="addNewButtonClicked()"
+    >
+      ADD
+    </button>
+  </div>
+  <div class="page-grid-three">
+    <div *ngFor="let property of properties; let i = index">
+      <app-property-card
+        [property]="property"
+        [index]="i"
+        (forRemove)="removeElementEvent($event)"
+        class="pointer-cursor"
+      />
+    </div>
+  </div>
+  <div class="empty" *ngIf="isEmptyList">
+    <p *ngIf="isAdmin">You do not have any requests.</p>
+    <p *ngIf="!isAdmin">You do not have any property.</p>
+    <button
+      *ngIf="!isAdmin"
+      class="raised-button"
+      (click)="addNewButtonClicked()"
+    >
+      ADD PROPERTY
+    </button>
+  </div>
+
+  <div *ngIf="!isAdmin" class="obtained-permissions">
+    <h1 class="title-text">Obtained permissions</h1>
+    <div class="page-grid-three">
+      <div *ngFor="let permission of permissions; let i = index">
+        <app-permission-property-card
+          [property]="permission"
+          [index]="i"
+          class="pointer-cursor"
+        >
+        </app-permission-property-card>
+      </div>
+    </div>
+  </div>
+</div>

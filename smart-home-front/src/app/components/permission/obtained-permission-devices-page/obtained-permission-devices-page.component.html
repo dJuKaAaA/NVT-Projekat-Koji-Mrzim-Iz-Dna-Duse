@@ -1,0 +1,12 @@
+<div class="page">
+  <h1 class="title-text">Obtained permissions</h1>
+  <div class="page-grid-three">
+    <div *ngFor="let device of devices; let i = index">
+      <app-device-card
+        [canTurnOffDevice]="device.deviceType === 'AIR_CONDITIONER'"
+        [device]="device"
+        [index]="i"
+      />
+    </div>
+  </div>
+</div>

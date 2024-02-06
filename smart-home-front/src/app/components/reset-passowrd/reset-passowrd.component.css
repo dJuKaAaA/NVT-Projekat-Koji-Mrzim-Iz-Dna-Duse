@@ -1,0 +1,68 @@
+h1 {
+    font-size: 1em;
+    font-weight: 200;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+  
+  .flex-center-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .login-card {
+    background-color: rgb(var(--card-color));
+    width: 100%;
+    height: calc(100vh - 50px - 30px);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circle {
+    width: 25em;
+    height: 25em;
+    background-color: rgb(var(--primary-light));
+    filter: blur(75px);
+    border-radius: 0 100% 0 0;
+    position: absolute;
+    bottom: -4em;
+    left: -4em;
+    z-index: 1;
+  }
+  
+  .title {
+    margin-top: -30px;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: rgb(var(--dark));
+  }
+  
+  .picture {
+    height: 75px;
+    width: 75px;
+    outline: 2px solid rgb(var(--dark));
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+  .picture:hover {
+    outline: 2px solid rgb(var(--primary-dark));
+    cursor: pointer;
+  }
+  .picture:hover i {
+    color: rgb(var(--primary-dark));
+  }
+  
+  p {
+    margin: 0;
+    font-size: 14px;
+  }

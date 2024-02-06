@@ -1,0 +1,14 @@
+<div>
+  <div class="card-flex">
+    <div class="input-wrapper" [ngClass]="{'error-input': isDateError}">
+      <i class="material-icons" [ngClass]="{'error-icon': isDateError}">date_range</i>
+      <input [(ngModel)]="dateFrom" placeholder="From" type="date" (change)="sendDate()" />
+    </div>
+    <div class="input-wrapper" [ngClass]="{'error-input': isDateError}">
+      <i class="material-icons" [ngClass]="{'error-icon': isDateError}">calendar_month</i>
+      <input [(ngModel)]="dateTo" placeholder="To" type="date" (change)="sendDate()"/>
+    </div>
+    <button (click)="onClick(true)" [disabled]="isButtonDisabled" class="raised-button">SHOW</button>
+  </div>
+  <p *ngIf="isDateError">{{ dateErrorMessage }}</p>
+</div>

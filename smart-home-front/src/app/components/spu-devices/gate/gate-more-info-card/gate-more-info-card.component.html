@@ -1,0 +1,21 @@
+<div class="card">
+    <h2>More Information</h2>
+    <div *ngIf="carPlates.length != 0" class="chips-flex">
+        <div *ngFor="let plate of carPlates">
+            <div class="chip" (click)="onChipClick(plate)">
+                {{plate}}
+            </div>
+        </div>
+    </div>
+    <div class='input-wrapper' [ngClass]="{'error-input': haveError}">
+        <i class="material-icons" [ngClass]="{'error-icon': haveError}">directions_car</i>
+        <input 
+            placeholder='Car Plate' 
+            [(ngModel)]="plateInput" 
+            name="plateInput"
+            (keyup.enter)="onEnterClick()"
+            (keyup)="onInputChange()"
+        />
+    </div>
+    <p class="error-message" *ngIf="haveError">Already have this plate.</p>
+</div>

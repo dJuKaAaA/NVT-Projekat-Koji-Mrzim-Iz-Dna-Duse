@@ -1,0 +1,44 @@
+<div class="card">
+  <h2>In/Out Vehicle Graph</h2>
+
+  <div class="parameters-wrapper">
+    <div>
+      <div style="display: flex; gap: 30px">
+        <app-time-range-dropdown-select (onSelect)="onTimeSelect($event)"/>
+        <div class="triggered-by-input" style="max-height: 43px">
+          <div class="input-wrapper">
+            <i class="material-icons">filter_list</i>
+            <input placeholder="*Vehicle Plate" [(ngModel)]="triggeredBy" name="triggeredBy" />
+          </div>
+          <div class="tooltip">
+            <button class="outline-button" (click)="populateInput()" [disabled]="triggeredBy == 'SYSTEM'"><i class="material-icons">schedule</i></button>
+            <span class="tooltiptext">Automatically populate the input field with the keyword "SYSTEM" to search for actions that were scheduled (performed by the system).</span>
+          </div>
+          <div class="tooltip">
+            <button class="outline-button" (click)="clearInput()" [disabled]="triggeredBy == ''"><i class="material-icons">clear</i></button>
+            <span class="tooltiptext tooltiptext-little">Clear input field.</span>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="haveError">{{ errorMessage }}</p>
+    </div>
+
+    <app-start-end-date-input
+      *ngIf="isDateRange"
+      (onShow)="onCustomDate($event)"
+      (dateChanged)="onDateChange($event)"
+      [isButtonDisabled]="!isButtonEnabled()"/>
+    <button *ngIf="!isDateRange" class="raised-button" (click)="displayData()" [disabled]="!isButtonEnabled()">Show</button>
+  </div>
+
+  <app-graph
+    #graph1
+    [pointTitle]="'Status'"
+    [yAxisTitle]="'Status'"
+    [dataSeries]="data"
+    [yAxisFormatter]="yAxisFormatter"
+    [visible]="true"
+    [height]="250"
+    [strokeType]="'straight'"/>
+
+</div>

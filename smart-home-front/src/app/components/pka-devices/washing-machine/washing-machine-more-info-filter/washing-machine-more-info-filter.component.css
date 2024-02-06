@@ -1,0 +1,78 @@
+.container {
+    width: 400px;
+    border: 1px;
+    display: flex;
+    justify-content: center;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    z-index: 2
+}
+
+.radio-btn-container {
+    display: flex;
+    margin: 20px;
+    justify-content: space-between
+}
+
+.margin-2 {
+    margin-top: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.date-container {
+    margin: auto;
+}
+
+button {
+    margin-top: 20px;
+    width: 322px;
+    background-color: rgb(219, 117, 83);
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 30px;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+}
+
+input[type="date"] {
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input[type="text"] {
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.close-icon {
+    cursor: pointer;
+    color: black;
+}
+
+.close-icon-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+h1 {
+    margin-top: 0px;
+}

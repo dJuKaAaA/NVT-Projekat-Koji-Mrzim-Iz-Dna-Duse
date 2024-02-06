@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Denied</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            background-color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #db7553;
+        }
+
+        p {
+            color: #555555;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .reason-div {
+            text-align: start;
+            display: flex;
+            gap: 4px;
+            margin-top: -10px;
+        }
+
+        .reason-div > p {
+            margin: 0;
+        }
+
+        .reason {
+            color: #cf4536;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+        <td align="center">
+            <table role="presentation" width="600" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="padding: 40px 0; text-align: center;">
+                        <h1>Property Denied</h1>
+                        <p th:text="'Your property ~' + ${propertyName} + '~ has been denied!'"></p>
+                        <div class="reason-div">
+                            <p style="margin-right: 4px;" class="reason">Reason:</p>
+                            <p th:text=" ${reason}" class="reason-content"></p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

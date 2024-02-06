@@ -1,0 +1,69 @@
+.main {
+  background-color: rgb(var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  height: 50px;
+}
+
+.logo {
+  font-size: 32px;
+  margin: 0;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 400;
+  color: rgb(var(--on-primary-dark));
+}
+
+.sign-out {
+  color: white;
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  gap: 30px;
+  margin: 0;
+}
+
+.option {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-transform: uppercase;
+}
+
+.line {
+  width: 100%;
+  height: 4px;
+  background-color: transparent;
+}
+
+.line-active {
+  background-color: rgb(var(--on-primary-dark));
+}
+
+.option::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: rgb(var(--on-primary-dark));
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  bottom: -5.5px;
+}
+
+.option:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.option.active::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}

@@ -1,0 +1,166 @@
+<dialog id="dialog">
+  <div class="flex-center-item">
+    <p style="text-align: center;">{{ dialogMessage }}</p>
+    <button class="raised-button" autofocus (click)="closeDialog()">DONE</button>
+  </div>
+</dialog>
+
+<div class="page">
+  <form
+    class="flex-center-item"
+    style="justify-content: start;"
+    (keydown.enter)="$event.preventDefault()"
+  >
+    <div style="display: flex; gap: 10px;">
+      <div class="card">
+        <h2>Device Info</h2>
+        <div
+          class="picture flex-center-item"
+          [ngClass]="{ 'error-wrapper': showError && !isImageUploaded }"
+          [ngStyle]="
+          isImageUploaded
+            ? {
+                'background-image': 'url(' + imageUrl + ')',
+                'background-size': 'cover'
+              }
+            : {}
+        "
+          (click)="openFileInput()"
+        >
+          <i
+            *ngIf="!isImageUploaded"
+            class="material-icons"
+            [ngClass]="{ 'error-icon': showError && !isImageUploaded }"
+          >image</i
+          >
+          <input
+            type="file"
+            #fileInput
+            style="display: none"
+            (change)="onImageUpload($event)"
+          />
+        </div>
+
+        <div class="input-wrapper" [ngClass]="{ 'error-input': isInputErr('propertyName') }">
+          <i class="material-icons" [ngClass]="{ 'error-icon': isInputErr('propertyName') }">devices</i>
+          <input placeholder="Name" [(ngModel)]="deviceName" name="deviceName" />
+        </div>
+
+        <div class="dropdown">
+          <div class="input-wrapper">
+            <i class="material-icons">device_hub</i>
+            <input
+              readonly
+              (click)="onDropdownInputClick()"
+              placeholder="Device"
+              [value]="selectedDevice"
+            />
+          </div>
+          <div id="myDropdown" class="dropdown-content" *ngIf="openedDropdown">
+            <a (click)="onSelect('Ambient Sensor')">Ambient Sensor</a>
+            <a (click)="onSelect('Air-Conditioner')">Air-Conditioner</a>
+            <a (click)="onSelect('Lamp')">Lamp</a>
+            <a (click)="onSelect('Vehicle Gate')">Vehicle Gate</a>
+            <a (click)="onSelect('Sprinkler System')">Sprinkler System</a>
+            <a (click)="onSelect('Solar Panel System')">Solar Panel System</a>
+            <a (click)="onSelect('Home Battery')">Home Battery</a>
+            <a (click)="onSelect('Electric Vehicle Charger')">Electric Vehicle Charger</a>
+          </div>
+        </div>
+
+        <div class="checkbox-wrapper" *ngIf="selectedDeviceType != 'HOME_BATTERY' && selectedDeviceType != 'SOLAR_PANEL_SYSTEM' && selectedDeviceType != 'ELECTRIC_VEHICLE_CHARGER'">
+          <input
+            class="checkbox-square"
+            type="checkbox"
+            placeholder="Uses batteries"
+            [(ngModel)]="usesBatteries"
+            name="usesBatteries"
+          />
+          <label>Uses batteries</label>
+        </div>
+
+        <div *ngIf="selectedDeviceType != 'HOME_BATTERY' && selectedDeviceType != 'SOLAR_PANEL_SYSTEM' && selectedDeviceType != 'ELECTRIC_VEHICLE_CHARGER'">
+          <label><b>Power consumption</b></label>
+          <div class='input-wrapper'>
+            <input placeholder='Power consumption' type="number" [(ngModel)]="powerConsumption" name="powerConsumption"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="selectedDeviceType == 'HOME_BATTERY'" class="card">
+        <h2 style="text-align: center">Home battery extra info</h2>
+        <div>
+          <label><b>Capacity (kW)</b></label>
+          <div class='input-wrapper'>
+            <input placeholder='Capacity' type="number" [(ngModel)]="batteryCapacity" name="batteryCapacity"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedDeviceType == 'ELECTRIC_VEHICLE_CHARGER'" class="card">
+        <h2 style="text-align: center">Electric vehicle charger extra info</h2>
+        <div>
+          <label><b>Charge power (kW per minute)</b></label>
+          <div class='input-wrapper'>
+            <input placeholder='' type="number" [(ngModel)]="chargePower" name="chargePower"/>
+          </div>
+        </div>
+        <div>
+          <label><b>Amount of chargers</b></label>
+          <div class='input-wrapper'>
+            <input placeholder='' type="number" [(ngModel)]="chargerCount" name="chargerCount"/>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="selectedDeviceType == 'SOLAR_PANEL_SYSTEM'" class="card">
+        <h2 style="text-align: center">Add a solar panel</h2>
+
+        <div class="solar-panel-field-container">
+          <label><b>Area (in metres squared)</b></label>
+          <div class="input-wrapper">
+            <input
+              placeholder="Area"
+              type="number"
+              [(ngModel)]="solarPanelArea"
+              name="solarPanelArea"
+            />
+          </div>
+        </div>
+        <div class="solar-panel-field-container">
+          <label><b>Efficiency (between 0.0 and 1.0)</b></label>
+          <div class="input-wrapper">
+            <input
+              placeholder="Efficiency"
+              type="number"
+              [(ngModel)]="solarPanelEfficiency"
+              name="solarPanelEfficiency"
+            />
+          </div>
+        </div>
+        <button style="width: 300px" class="raised-button" (click)="addPanels()">
+          Add panel
+        </button>
+      </div>
+
+      <app-gate-more-info-card
+        *ngIf="selectedDeviceType == 'VEHICLE_GATE'"
+        (onPlatesChanged)="onReceivedPlates($event)"
+      />
+
+      <app-sprinkler-system-schedule-card
+        *ngIf="selectedDeviceType == 'SPRINKLER_SYSTEM'"
+        (onChangedSchedules)="onChangeSchedules($event)"
+      />
+
+      <div *ngIf="selectedDeviceType == 'AIR_CONDITIONER'">
+        <app-air-conditioner-more-info-card> </app-air-conditioner-more-info-card>
+      </div>
+
+    </div>
+    <button type="submit" class="raised-button" style="width: 100%" (click)="submit()">
+      CREATE DEVICE
+    </button>
+  </form>
+</div>

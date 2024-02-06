@@ -1,0 +1,78 @@
+<dialog id="dialog">
+  <div class="flex-center-item">
+    <p style="text-align: center;">No data found for those parameters.</p>
+    <button class="raised-button" autofocus (click)="closeDialog()">DONE</button>
+  </div>
+</dialog>
+
+<div class="graphs-container">
+  <div class="container">
+    <app-graph
+      #graph1
+      [graphTitle]="'Power consumption'"
+      [pointTitle]="'Energy'"
+      [yAxisTitle]="'Timestamp'"
+      [dataSeries]="powerConsumptionDataSeries"
+      [visible]="true"
+    ></app-graph>
+  </div>
+</div>
+
+<div class="flex-container">
+  <div class="custom-select">
+    <select [(ngModel)]="selectedPeriod" (change)="onPeriodChange($event)">
+      <option value="" *ngIf="!selectedPeriod" disabled selected>
+        Choose period
+      </option>
+      <option value="H6">6h</option>
+      <option value="H12">12h</option>
+      <option value="H24">24h</option>
+      <option value="W1">1w</option>
+      <option value="M1">1m</option>
+      <option value="CUSTOM_DATE">Custom Date</option>
+    </select>
+
+    <select (change)="onCategoryChange($event)">
+      <option value="CITY">Cities</option>
+      <option value="PROPERTY">Properties</option>
+    </select>
+
+    <select [(ngModel)]="city" (change)="onCityChange($event)" *ngIf="category == 'CITY'">
+      <option value="" *ngIf="allCities.length == 0">No cities available</option>
+      <option *ngFor="let city of allCities" [ngValue]="city">{{ city.name }}</option>
+    </select>
+
+    <select [(ngModel)]="property" (change)="onPropertyChange($event)" *ngIf="category == 'PROPERTY'">
+      <option value="" *ngIf="allProperties.length == 0">No properties available</option>
+      <option *ngFor="let property of allProperties" [ngValue]="property">{{ property.name }}</option>
+    </select>
+
+  </div>
+
+  <div *ngIf="selectedPeriod === 'CUSTOM_DATE'" class="datepicker-container">
+    <label for="datepickerStartDate">Select Start Date:</label>
+    <input
+      type="date"
+      id="datepickerStartDate"
+      name="datepicker"
+      [(ngModel)]="startDateTime"
+    />
+  </div>
+
+  <div *ngIf="selectedPeriod === 'CUSTOM_DATE'" class="datepicker-container">
+    <label for="datepickerEndDate">Select End Date:</label>
+    <input
+      type="date"
+      id="datepickerEndDate"
+      name="datepicker"
+      [(ngModel)]="endDateTime"
+    />
+  </div>
+  <button
+    class="display-button"
+    (click)="displayData()"
+  >
+    DISPLAY
+  </button>
+
+</div>

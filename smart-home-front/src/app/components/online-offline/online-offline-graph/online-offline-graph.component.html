@@ -1,0 +1,19 @@
+<div class="card">
+  <h2>Status Graph [online/offline]</h2>
+
+  <div class="parameters-wrapper">
+    <app-time-range-dropdown-select (onSelect)="onTimeSelect($event)" [haveRealtime]="false"/>
+    <app-start-end-date-input *ngIf="isDateRange" (onShow)="onCustomDate($event)"/>
+  </div>
+
+  <app-graph
+    #graph1
+    [pointTitle]="'Status'"
+    [yAxisTitle]="'Status'"
+    [dataSeries]="data"
+    [yAxisFormatter]="yAxisFormatter"
+    [visible]="true"
+    [height]="250"
+    [strokeType]="'straight'"/>
+
+</div>

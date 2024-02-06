@@ -1,0 +1,37 @@
+<div class="page">
+  <div *ngIf="devices.length > 0" class="title-box">
+    <h1 class="title-text">Your devices</h1>
+    <button
+      class="raised-button"
+      style="width: 100px; margin: 0"
+      (click)="addNewButtonClicked()"
+    >
+      ADD
+    </button>
+  </div>
+  <div class="page-grid-three">
+    <div *ngFor="let device of devices; let i = index">
+      <app-device-card
+        [canTurnOffDevice]="device.deviceType === 'AIR_CONDITIONER'"
+        [device]="device"
+        [index]="i"
+        (forRemove)="removeElementEvent($event)"
+      />
+    </div>
+  </div>
+  <div class="empty" *ngIf="devices.length == 0">
+    <p>You do not have any devices.</p>
+    <button class="raised-button" (click)="addNewButtonClicked()">
+      ADD DEVICE
+    </button>
+  </div>
+  <button
+    class="raised-button"
+    style="position: absolute; bottom: 20px; right: 20px"
+    (click)="goToPowerConsumption()"
+  >
+    See power consumption
+  </button>
+
+  
+</div>

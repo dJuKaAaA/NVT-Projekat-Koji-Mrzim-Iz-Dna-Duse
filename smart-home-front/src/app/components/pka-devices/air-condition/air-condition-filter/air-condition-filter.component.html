@@ -1,0 +1,30 @@
+<div class="container">
+  <div>
+    <div class="close-icon-container">
+      <i (click)="closeFilterForm()" class="material-icons close-icon">close</i>
+    </div>
+    <h1 style="text-align: center">Filter</h1>
+
+    <form [formGroup]="filterForm">
+      <div>
+        <input
+          class="email-input"
+          type="text"
+          id="userEmail"
+          formControlName="userEmail"
+          placeholder="Enter user email"
+        />
+      </div>
+
+      <div class="date-container">
+        <label class="margin-2" for="startDate">Start Date:</label>
+        <input type="date" id="startDate" formControlName="startDate" />
+
+        <label class="margin-2" for="endDate">End Date:</label>
+        <input type="date" id="endDate" formControlName="endDate" />
+      </div>
+
+      <button type="button" (click)="applyFilters()">Apply Filter</button>
+    </form>
+  </div>
+</div>

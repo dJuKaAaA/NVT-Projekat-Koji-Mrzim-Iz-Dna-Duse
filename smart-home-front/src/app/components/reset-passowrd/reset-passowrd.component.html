@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="flex-center-item">
+      <h1 class="title">Reset Password!</h1>
+      
+      <div class="input-wrapper">
+        <i class="material-icons">person</i>
+        <input [(ngModel)]="newPassword" placeholder="New Password" />
+      </div>
+      <div class="input-wrapper">
+        <i class="material-icons">mail</i>
+        <input [(ngModel)]="confirmNewPassword" placeholder="Confirm Password" />
+      </div>
+      <button (click)="resetPassword()" class="raised-button">
+        RESET
+      </button>
+    </div>
+  </div>
+  

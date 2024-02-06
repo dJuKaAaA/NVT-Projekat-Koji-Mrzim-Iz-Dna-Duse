@@ -1,0 +1,32 @@
+<div
+  class="card"
+  [ngClass]="{ 'clickable-card': property!.status.toString() === 'APPROVED' }"
+  (click)="goToDevices()"
+>
+  <div class="image-container">
+    <img *ngIf="imgPresent" [src]="imageBlob" />
+    <div class="title">{{ property?.name }}</div>
+  </div>
+  <div>
+    <div class="description-item">
+      <i class="material-symbols-outlined">home_work</i>
+      <p>{{ getType() }}</p>
+    </div>
+    <div class="description-item">
+      <i class="material-symbols-outlined">floor</i>
+      <p>{{ property?.floors }}</p>
+    </div>
+    <div class="description-item">
+      <i class="material-icons">crop</i>
+      <p>{{ property?.area }}m²</p>
+    </div>
+    <div class="description-item">
+      <i class="material-symbols-outlined">signpost</i>
+      <p>{{ property?.address }}</p>
+    </div>
+    <div class="description-item">
+      <i class="material-icons">location_city</i>
+      <p>{{ property?.city?.name }}, {{ property?.city?.countryName }}</p>
+    </div>
+  </div>
+</div>

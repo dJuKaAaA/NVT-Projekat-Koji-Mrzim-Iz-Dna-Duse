@@ -1,0 +1,26 @@
+.card-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px;
+    color: rgb(var(--dark));
+}
+
+.obtained-permissions {
+  margin-top: 40px;
+}
+
+.obtained-permissions > h1 {
+  margin-bottom: 20px;
+}
+
+.pointer-cursor { }
+.pointer-cursor:hover {
+  cursor: pointer;
+}

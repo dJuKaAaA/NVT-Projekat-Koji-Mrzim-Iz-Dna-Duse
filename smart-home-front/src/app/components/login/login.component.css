@@ -1,0 +1,35 @@
+h1{
+    font-size: 1em;
+    font-weight: 200;
+}
+
+.flex-center-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title{
+    margin-top: -30px;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    color: rgb(var(--dark));
+}
+
+p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.p-button {
+    margin-left: 5px;
+    color: rgb(var(--primary-dark));
+    font-weight: 600;
+}
+
+.p-button:hover{
+    cursor: pointer;
+    color: rgb(var(--primary-light));
+}

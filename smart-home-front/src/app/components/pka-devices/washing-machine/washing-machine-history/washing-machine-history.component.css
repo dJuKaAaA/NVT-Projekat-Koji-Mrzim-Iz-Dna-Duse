@@ -1,0 +1,105 @@
+.table {
+    height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 200px;
+    margin-bottom: 200px;
+}
+
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.history-row {
+    display: flex;
+    width: 100%;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+/* .history-row:hover {
+    background-color: #f9f9f9;
+} */
+
+.switch {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+.header {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.history-row>div {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user {
+    flex: 1;
+}
+
+.action {
+    flex: 2;
+}
+
+.timestamp {
+    flex: 3;
+}
+
+.mode {
+    flex: 2;
+}
+
+.temperature {
+    flex: 2;
+}
+
+.executor {
+    flex: 3
+}
+
+button {
+    width: 150px;
+    background-color: rgb(219, 117, 83);
+    margin-right: 5px;
+    height: 50px;
+}
+
+.buttons-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.filter-button {
+    margin-left: 5px;
+    margin-top: 10;
+}
+
+.buttons-container button:first-child {
+    margin-right: auto;
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
+
+.center-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+p {
+    margin-top: 100px;
+}

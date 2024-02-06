@@ -1,0 +1,38 @@
+<div class="card">
+
+  <i class="material-icons" (click)="clear()">clear</i>
+  <div class="time-wrapper">
+    <div style="display: flex">
+      <div>Start:</div>
+      <input type="time" placeholder="From" [(ngModel)]="schedule.item.startTime" (change)="sendEmitter()">
+    </div>
+    <div style="display: flex">
+      <div>End:</div>
+      <input type="time" placeholder="To" [(ngModel)]="schedule.item.endTime" (change)="sendEmitter()">
+    </div>
+  </div>
+  <div class="days-wrapper">
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('MONDAY')}"
+         (click)="clickDay('MONDAY')">MON</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('TUESDAY')}"
+         (click)="clickDay('TUESDAY')">TUE</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('WEDNESDAY')}"
+         (click)="clickDay('WEDNESDAY')">WED</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('THURSDAY')}"
+         (click)="clickDay('THURSDAY')">THU</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('FRIDAY')}"
+         (click)="clickDay('FRIDAY')">FRI</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('SATURDAY')}"
+         (click)="clickDay('SATURDAY')">SAT</div>
+    <div class="radio-btn"
+         [ngClass]="{'radio-btn-selected' : schedule.item.days.includes('SUNDAY')}"
+         (click)="clickDay('SUNDAY')">SUN</div>
+  </div>
+  <p class="info-text" *ngIf="showInfoText"> *Every day is selected by default </p>
+</div>

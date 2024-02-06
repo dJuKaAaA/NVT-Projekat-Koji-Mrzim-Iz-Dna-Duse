@@ -1,0 +1,48 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# FRONT
+
+# Compiled output
+/smart-home-front/dist
+/smart-home-front/tmp
+/smart-home-front/out-tsc
+/smart-home-front/bazel-out
+
+# Node
+/smart-home-front/node_modules
+/smart-home-front/npm-debug.log
+/smart-home-front/yarn-error.log
+
+# IDEs and editors
+/smart-home-front/.idea/
+/smart-home-front/.project
+/smart-home-front/.classpath
+/smart-home-front/.c9/
+/smart-home-front/*.launch
+/smart-home-front/.settings/
+/smart-home-front/*.sublime-workspace
+
+# Visual Studio Code
+/smart-home-front/.vscode/*
+!/smart-home-front/.vscode/settings.json
+!/smart-home-front/.vscode/tasks.json
+!/smart-home-front/.vscode/launch.json
+!/smart-home-front/.vscode/extensions.json
+/smart-home-front/.history/*
+
+# Miscellaneous
+/smart-home-front/.angular/cache
+/smart-home-front/.sass-cache/
+/smart-home-front/connect.lock
+/smart-home-front/coverage
+/smart-home-front/libpeerconnection.log
+/smart-home-front/testem.log
+/smart-home-front/typings
+
+# System files
+/smart-home-front/.DS_Store
+/smart-home-front/Thumbs.db
+
+# 
+/smart-home-be/profile_image/*
+/smart-home-be/property_image/*

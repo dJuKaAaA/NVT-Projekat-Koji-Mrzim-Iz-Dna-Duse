@@ -1,0 +1,47 @@
+<div class="page">
+  <div class="graphs-container">
+    <div class="container">
+      <app-graph
+        #graph1
+        [graphTitle]="'Actions'"
+        [pointTitle]="'Action'"
+        [yAxisTitle]="'Timestamp'"
+        [dataSeries]="actionsDataSeries"
+        [visible]="true"
+      ></app-graph>
+    </div>
+  </div>
+
+  <div class="flex-container">
+
+    <div class="datepicker-container">
+      <label for="datepickerStartDate">Select Start Date:</label>
+      <input
+        type="date"
+        id="datepickerStartDate"
+        name="datepicker"
+        [(ngModel)]="startDateTime"
+      />
+    </div>
+
+    <div class="datepicker-container">
+      <label for="datepickerEndDate">Select End Date:</label>
+      <input
+        type="date"
+        id="datepickerEndDate"
+        name="datepicker"
+        [(ngModel)]="endDateTime"
+      />
+    </div>
+    <button
+      class="display-button"
+      (click)="displayData()"
+    >
+      DISPLAY
+    </button>
+  </div>
+
+  <div style="padding: 20px">
+    <app-online-offline-graph [deviceId]="deviceId"/>
+  </div>
+</div>

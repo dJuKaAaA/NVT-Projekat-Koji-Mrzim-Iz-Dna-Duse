@@ -1,0 +1,20 @@
+.page {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: var(--page-padding);
+}
+
+.picture {
+    width: 248px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.map-wrapper {
+    border: 2px solid rgba(var(--dark), 0.2);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+}
+
+#map { height: 100%; }
+.error-wrapper { border: 2px solid rgb(var(--error-color)) }

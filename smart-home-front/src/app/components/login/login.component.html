@@ -1,0 +1,16 @@
+<div class="flex-center-item">
+  <h1 class="title">Welcome!</h1>
+  <div class="input-wrapper">
+    <i class="material-icons">email</i>
+    <input [(ngModel)]="email" placeholder="Email" />
+  </div>
+  <div class="input-wrapper">
+    <i class="material-icons">lock</i>
+    <input [(ngModel)]="password" placeholder="Password" type="password" />
+  </div>
+  <button (click)="login()" class="raised-button">LOGIN</button>
+  <div style="display: flex">
+    <p>Not registered?</p>
+    <p (click)="onCreateAccount()" class="p-button">Create an account</p>
+  </div>
+</div>

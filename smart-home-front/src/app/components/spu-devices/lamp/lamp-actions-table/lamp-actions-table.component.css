@@ -1,0 +1,115 @@
+h2 {
+  margin: 0 0 2px 10px;
+  font-size: 20px;
+}
+
+.card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 23.5rem;
+  overflow: hidden;
+}
+
+.parameters-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.table {
+  width:100%;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+.table-header {
+  display: flex;
+  width: 100%;
+  font-weight: 600;
+  background: rgba(var(--primary-light), 0.8);
+  padding: 8px 0;
+}
+
+.table-row {
+  display: flex;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.table-content:nth-child(even) {
+  background: rgba(var(--primary-light), 0.15);
+}
+
+.table-data, .header-item {
+  flex: 1 1 20%;
+  text-align: center;
+}
+
+.no-data {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triggered-by-input {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  height: 33px;
+  width: fit-content;
+  padding: 0 10px;
+}
+
+button > i {
+  margin-top: 4px;
+  color: rgba(var(--dark), 0.8);
+}
+
+p {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  color: rgb(var(--error-color));
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+  font-size: 12px;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  padding: 0.25em 0.5em;
+  background-color: rgba(var(--dark), 0.9);
+  color: #fff;
+  text-align: center;
+  border-radius: 0.25em;
+  white-space: pre-wrap;
+  width: 300px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: -100%;
+  left: -50%;
+  transition-property: visibility;
+  transition-delay: 0s;
+}
+
+.tooltip .tooltiptext-little {
+  max-width: 100px;
+  top: -55%;
+  left: -50%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  transition-delay: 0.3s;
+}
+

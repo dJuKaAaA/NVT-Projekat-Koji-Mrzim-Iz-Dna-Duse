@@ -1,0 +1,100 @@
+<div class="page">
+  <div class="switch">
+    <app-toggle-switch
+      #ambientSensorSwitch
+      (isCheckedChange)="toggleDevice($event)"
+      [isChecked]="isDeviceOn"
+    ></app-toggle-switch>
+  </div>
+  <div class="graphs-container">
+    <div class="container">
+      <app-graph
+        #graph1
+        [graphTitle]="'Temperature'"
+        [pointTitle]="'Value'"
+        [yAxisTitle]="'Temperature'"
+        [dataSeries]="temperatureDataSeries"
+        [visible]="true"
+      ></app-graph>
+    </div>
+    <div class="container">
+      <app-graph
+        #graph2
+        [graphTitle]="'Air Humidity'"
+        [pointTitle]="'Value'"
+        [yAxisTitle]="'Air Humidity'"
+        [dataSeries]="humidityDataSeries"
+        [visible]="false"
+      ></app-graph>
+    </div>
+  </div>
+
+  <div class="flex-container">
+    <div class="custom-select">
+      <select [(ngModel)]="selectedPeriod" (change)="onPeriodChange($event)">
+        <option value="" *ngIf="!selectedPeriod" disabled selected>
+          Choose period
+        </option>
+        <option value="REAL_TIME">Real Time</option>
+        <option value="H6">6h</option>
+        <option value="H12">12h</option>
+        <option value="H24">24h</option>
+        <option value="W1">1w</option>
+        <option value="M1">1m</option>
+        <option value="CUSTOM_DATE">Custom Date</option>
+      </select>
+    </div>
+
+    <div
+      style="margin-right: 20px"
+      *ngIf="selectedPeriod === 'CUSTOM_DATE'"
+      class="datepicker-container"
+    >
+      <label for="start_datepicker">Select Start Date:</label>
+      <input
+        type="datetime-local"
+        id="start_datepicker"
+        name="start_datepicker"
+        [(ngModel)]="startDateTime"
+      />
+    </div>
+
+    <div
+      style="margin-right: 20px"
+      *ngIf="selectedPeriod === 'CUSTOM_DATE'"
+      class="datepicker-container"
+    >
+      <label for="end_datepicker">Select End Date:</label>
+      <input
+        type="datetime-local"
+        id="end_datepicker"
+        name="end_datepicker"
+        [(ngModel)]="endDateTime"
+      />
+    </div>
+    <button
+      *ngIf="selectedPeriod == 'CUSTOM_DATE'"
+      class="display-button"
+      (click)="displayOnDisplayGraphData()"
+    >
+      DISPLAY
+    </button>
+
+    <button class="next-graph-button" (click)="displayNextGraph()">
+      NEXT GRAPH
+    </button>
+  </div>
+  <div *ngIf="selectedPeriod == 'REAL_TIME'" class="temperature-container">
+    <div class="temperature-value">
+      Current Temperature:
+      <span class="temperature-up">{{ currentTemperature }}°C</span>
+    </div>
+    <div class="temperature-value">
+      Current Air Humidity:
+      <span class="temperature-down">{{ currentAirHumidity }}%</span>
+    </div>
+  </div>
+  <div class="online-offline">
+    <app-online-offline-graph [deviceId]="deviceId"/>
+  </div>
+</div>

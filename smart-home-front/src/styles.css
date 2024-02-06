@@ -1,0 +1,326 @@
+:root {
+    --primary-dark: 219, 117, 83;
+    --on-primary-dark: 255 255 255;
+    --primary-light: 214, 139, 109;
+    --dark: 79, 59, 46;
+    --background-color: 241, 241, 241;
+    --card-color: 250, 250, 250;
+    --error-color: 207, 69, 54;
+    --disabled-color: 189, 187, 185;
+
+    --card-radius: 5px;
+    --button-radius: 5px;
+
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    --page-padding: 40px;
+    --navbar-padding: 30px;
+    --navbar-height: 50px;
+}
+
+.b { outline: 2px dashed red; }
+
+body{
+    margin: 0;
+    background-color: rgb(var(--background-color));
+    font-family: 'Titillium Web', sans-serif;
+    overflow: hidden;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* --------------------------------------------------------------------- INPUTS */
+.input-wrapper {
+    width: 250px;
+    margin: 5px 0;
+    padding: 0 0 5px 0;
+    display: flex;
+    border: none;
+    border-bottom: 2px solid rgba(var(--dark), 0.2);
+    transition: border-color 0.1s, color 0.1s;
+}
+.input-wrapper:focus-within { border-color:  rgb(var(--primary-dark)); }
+.input-wrapper:focus-within i { color: rgb(var(--primary-dark)); }
+.input-wrapper:hover:not(:focus-within) { border-bottom-color: rgba(var(--dark), 0.8); }
+.input-wrapper:hover:not(:focus-within) i { color: rgba(var(--dark), 0.8); }
+input {
+    width: 100%;
+    margin: 0 5px 0 5px;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+    font-family: 'Titillium Web', sans-serif;
+    color: rgb(var(--dark));
+}
+input:hover { background-color: transparent; }
+i {
+    scale: 0.9;
+    color: rgba(var(--dark), 0.2);
+    transition: color 0.1s;
+}
+
+/* --------------------------------------------------------------------- BUTTONS */
+button {
+    width: 250px;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: var(--button-radius);
+    border: none;
+    font-size: 16px;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.raised-button {
+    background-color: rgb(var(--primary-dark));
+    color: rgb(var(--on-primary-dark));
+}
+
+.raised-button:hover{ opacity: 0.9; }
+
+.raised-button:disabled {
+  background-color: rgba(var(--primary-dark), 0.6);
+}
+.raised-button:disabled:hover{
+  background-color: rgba(var(--primary-dark), 0.6);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.outline-button {
+    outline: 2px solid rgb(var(--primary-dark));
+    background-color: transparent;
+    color: rgb(var(--dark));
+    outline-offset: -1px;
+}
+.outline-button:hover{ background-color: rgba(var(--primary-dark), 0.1); }
+.outline-button:disabled{
+    outline: 2px solid rgb(var(--disabled-color));
+    color: rgb(var(--disabled-color));
+    cursor: not-allowed;
+}
+.outline-button:disabled:hover {background-color: transparent;}
+
+/* --------------------------------------------------------------------- PAGES */
+.page {
+    padding: var(--page-padding);
+    height: calc(100vh - var(--navbar-height) - var(--navbar-padding) - 2 * var(--page-padding));
+    overflow-y: scroll;
+}
+.page-grid-three {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, calc(33% - 10px));
+    gap: 20px;
+}
+.empty {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --------------------------------------------------------------------- CARDS */
+.card-new {
+    padding: 10px;
+    border: 3.5px dotted rgb(var(--primary-dark));
+    border-radius: var(--card-radius);
+}
+
+.card {
+    padding: 10px;
+    background-color: rgb(var(--card-color));
+    box-shadow: var(--card-shadow);
+    border-radius: var(--button-radius);
+}
+
+/* --------------------------------------------------------------------- SCROLL BAR */
+::-webkit-scrollbar { width: 8px; }
+/* Track */
+::-webkit-scrollbar-track { background: rgb(var(--background-color)); }
+/* Handle */
+::-webkit-scrollbar-thumb { background: rgba(var(--primary-dark), 0.45); border-radius: var(--card-radius);}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--primary-dark)); }
+
+
+/* --------------------------------------------------------------------- OTHER */
+.picture {
+    height: 120px;
+    width: 120px;
+    border: 2px solid rgba(var(--dark), 0.2);
+    border-radius: var(--card-radius);
+    margin-bottom: 10px;
+}
+.picture:hover { border: 2px solid rgba(var(--dark), 0.8); cursor: pointer;}
+.picture:hover i { color: rgba(var(--dark), 0.8); }
+
+.flex-center-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------------------- RADIO INPUTS */
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0 0 0.25rem 0;
+    width: 250px;
+    font-size: 14px;
+    border: none;
+    border-bottom: 2px solid rgb(var(--dark), 0.2);
+    margin: 0 0 5px 0;
+}
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+.radio-inputs .radio input { display: none; }
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgb(var(--dark));
+    transition: all .15s ease-in-out;
+}
+.radio-inputs .radio input:checked + .name {
+    background-color: rgba(var(--primary-light), 0.25);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------------------- DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display:block;
+    position: absolute;
+    background-color: rgb(var(--card-color));
+    border-radius: var(--card-radius);
+    width: 250px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid rgba(var(--dark), 0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: rgb(var(--dark));
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    border-radius: var(--card-radius);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* --------------------------------------------------------------------- ERRORS */
+.error-input {
+    border: none;
+    border-bottom: 2px solid rgb(var(--error-color));
+    /* color: rgb(var(--error-color)); */
+}
+.error-icon {
+    color: rgb(var(--error-color));
+}
+.error-wrapper { border: 2px solid rgb(var(--error-color)) }
+
+/* --------------------------------------------------------------------- DIALOGS */
+::backdrop {
+    background-color: black;
+    opacity: 0.4;
+}
+dialog {
+    border: none;
+    padding: 30px;
+    background-color: rgb(var(--card-color));
+    box-shadow: var(--card-shadow);
+    border-radius: var(--button-radius);
+}
+/* --------------------------------------------------------------------- REMOVE!!!!!!!!!!! */
+textarea {
+    width: 100%;
+    margin-right: 5px;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 16px;
+    font-family: 'Titillium Web', sans-serif;
+    color: rgb(var(--dark));
+    height: 50px;
+    max-height: 100px;
+    line-height: 0.9;
+    margin-top: 6px;
+}
+textarea:hover { background-color: transparent; }
+
+/* --------------------------------------------------------------------- TITLE HEADER */
+.title-box {
+    display: flex;
+    padding: 10px 10px 20px 10px;
+    margin-top: -10px;
+    justify-content: space-between;
+}
+.title-text {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(var(--dark));
+}
+
+/* --------------------------------------------------------------------- MAP */
+.map-pin{
+    scale: 1.75;
+    color: rgb(var(--primary-dark));
+}
+
+select {
+    appearance: none;
+    width: 250px;
+    padding: 18px;
+    font-size: 18px;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+}
+@import"~leaflet/dist/leaflet.css";
+
+.clickable-card { transition: all .2s ease-in-out; }
+.clickable-card:hover { scale: 1.015; }
+
+.checkbox-wrapper {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 15px;
+    width: 250px;
+    margin: 5px 0;
+    padding: 0 0 5px 0;
+ }
+.checkbox-square {
+    margin: 0;
+    accent-color: rgb(var(--primary-dark));
+}

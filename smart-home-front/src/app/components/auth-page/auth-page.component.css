@@ -1,0 +1,47 @@
+.flex-center-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-card {
+  background-color: rgb(var(--card-color));
+  width: 100%;
+  height: calc(100vh - 50px - 30px);
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.circle {
+  width: 25em;
+  height: 25em;
+  background-color: rgb(var(--primary-light));
+  filter: blur(75px);
+  border-radius: 0 100% 0 0;
+  position: absolute;
+  bottom: -4em;
+  left: -4em;
+  z-index: 1;
+}
+
+.p-button {
+  margin-left: 5px;
+  color: rgb(var(--primary-dark));
+  font-weight: 600;
+}
+
+.p-button:hover {
+  color: rgb(var(--primary-light));
+  cursor: default;
+}
+
+.m0 {
+  margin-top: 0;
+}
+
+p{
+  margin: 0;
+  font-size: 14px;
+}

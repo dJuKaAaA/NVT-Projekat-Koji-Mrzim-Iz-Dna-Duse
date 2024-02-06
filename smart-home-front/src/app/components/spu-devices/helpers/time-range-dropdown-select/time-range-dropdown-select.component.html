@@ -1,0 +1,19 @@
+<div class="dropdown">
+  <div class='input-wrapper'>
+    <i class="material-icons">history</i>
+    <input
+      readonly
+      (click)="onDropdownInputClick()"
+      placeholder='*Time'
+      [value]="selectedTimeForDisplay"/>
+  </div>
+  <div id="myDropdown" class="dropdown-content" *ngIf="openedDropdown">
+    <a (click)="onSelectItem('H6', '6 Hours')">6 Hours</a>
+    <a (click)="onSelectItem('H12', '12 Hours')">12 Hours</a>
+    <a (click)="onSelectItem('H24', '24 Hours')">24 Hours</a>
+    <a (click)="onSelectItem('W1', '1 Week')">1 Week</a>
+    <a (click)="onSelectItem('M1', '1 Month')">1 Month</a>
+    <a (click)="onSelectItem('CUSTOM_DATE', 'Custom Date')">Custom Date</a>
+    <a *ngIf="haveRealtime" (click)="onSelectItem('REAL_TIME', 'Real Time')">Real Time</a>
+  </div>
+</div>

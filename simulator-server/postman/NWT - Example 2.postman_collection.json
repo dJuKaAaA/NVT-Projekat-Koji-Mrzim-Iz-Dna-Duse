@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "ebbd9aea-2efd-47f5-8aab-138254810a5e",
+		"name": "NWT - Example 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30513109"
+	},
+	"item": [
+		{
+			"name": "Get last 10 measurements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/measurements/10?name=Temperature",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"measurements",
+						"10"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Temperature"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get aggregated data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/measurements/aggregated?name=Humidity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"measurements",
+						"aggregated"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Humidity"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get deviation from mean",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/measurements/deviation?name=Irradiance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"measurements",
+						"deviation"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Irradiance"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get last measurement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/measurements/last?name=Precipitation",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"measurements",
+						"last"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Precipitation"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,18 @@
+<div class="login-card flex-center-item">
+  <app-login
+    (onCreateAccountEvent)="createAccountView()"
+    *ngIf="isLogin"
+  ></app-login>
+
+  <div *ngIf="!isLogin">
+    <app-create-account
+      (onLoginEvent)="loginView()"
+      onLogin
+    ></app-create-account>
+    <div style="display: flex; justify-content: center">
+      <p class="m0">Already have an account?</p>
+      <p (click)="loginView()" class="p-button m0">Log in</p>
+    </div>
+  </div>
+  <div class="circle"></div>
+</div>
